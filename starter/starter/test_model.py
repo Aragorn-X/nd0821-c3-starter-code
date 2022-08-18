@@ -37,7 +37,7 @@ def test_training(training_model):
     csv_file = 'census_clean.csv'  # cleaned file (all spaces removed)
     data_path = os.path.join(os.path.abspath(os.curdir), data_dir, csv_file)
     data_df = train_model.import_data(data_path)
-    train, test = train_test_split(data_df, test_size=0.20)
+    train, test = train_test_split(data_df, test_size=0.20, random_state=42)
 
     cat_features = [
         "workclass",
