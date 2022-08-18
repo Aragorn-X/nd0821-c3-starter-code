@@ -29,6 +29,17 @@ def training_model(input_array, target_array):
 
     return output_model
 
+
+def save_model(path, t_model):
+    '''
+    Saving trained model to specified path dir
+    :param path: path to model dir
+    :param t_model: trained model
+    '''
+    with open(path, 'wb') as m_file:
+        pickle.dump(t_model, m_file)
+
+
 if __name__ == "__main__":
     cur_dir = os.path.abspath(os.curdir)
     os.chdir("..")
@@ -74,10 +85,7 @@ if __name__ == "__main__":
     # Save model
     model_dir = 'model'
     model_path = os.path.join(os.path.abspath(os.curdir), model_dir, 'model.pkl')
-
-    with open(model_path, 'wb') as model_file:
-        pickle.dump(trained_model, model_file)
-
+    save_model(model_path, trained_model)
 
 
 
