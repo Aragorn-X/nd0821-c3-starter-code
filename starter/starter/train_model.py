@@ -86,7 +86,7 @@ if __name__ == "__main__":
     data_df = import_data(data_path)
 
     # Optional enhancement, use K-fold cross validation instead of a train-test split.
-    train, test = train_test_split(data_df, test_size=0.20)
+    train, test = train_test_split(data_df, test_size=0.20, random_state=42)
 
     cat_features = [
         "workclass",
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     # Train model
     trained_model = training_model(X_train, y_train)
 
-    # Inference and performance metrics
+    # Inference and performance metrics on the test dataset
     predictions = model.inference(trained_model, X_test)
     precision, recall, f_beta = model.compute_model_metrics(y_test, predictions)
     print('precision: ', precision)
