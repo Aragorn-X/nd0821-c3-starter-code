@@ -19,6 +19,15 @@ def import_data(path):
     return df
 
 
+def training_model(input_array, target_array):
+    '''
+    :param input_array: input np.array
+    :param target_array: target np.array
+    :return: output_model: trained model
+    '''
+    output_model = model.train_model(input_array, target_array)
+
+    return output_model
 
 if __name__ == "__main__":
     cur_dir = os.path.abspath(os.curdir)
@@ -53,7 +62,7 @@ if __name__ == "__main__":
     )
 
     # Train model
-    trained_model = model.train_model(X_train, y_train)
+    trained_model = training_model(X_train, y_train)
 
     # Inference and performance metrics
     predictions = model.inference(trained_model, X_test)
