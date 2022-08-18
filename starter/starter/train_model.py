@@ -7,7 +7,7 @@ import pandas as pd
 import os
 from ml import data, model
 import pickle
-
+import csv
 
 # Add code to load in the data.
 def import_data(path):
@@ -38,6 +38,43 @@ def save_model(path, t_model):
     '''
     with open(path, 'wb') as m_file:
         pickle.dump(t_model, m_file)
+
+
+def slicing_perfo(path, features_lst, df, enc, binarizer, mdl):
+    '''
+    Slicing and model performances
+    :param path: path to log dir
+    :param features_lst: categorical feature list
+    :param df: dataframe
+    :param enc: encoder
+    :param binarizer: binarizer
+    :param mdl: trained model
+    '''
+
+    file_exists = os.path.isfile(path)
+    for feature in features_lst:
+        for feature_value in df[feature].unique():
+            # slicing dataframe with respect to feature and feature_value
+            sliced_df = df[df[feature] == feature_value]
+            X_slice, y_slice, _, _ = data.process_data(
+                sliced_df,
+                categorical_features=features_lst,
+                label="salary", training=False,
+                encoder=enc, lb=binarizer)
+            predictions_slice = model.inference(mdl, X_slice)
+            precision_sl, recall_sl, f_beta_sl = model.compute_model_metrics(y_slice, predictions_slice)
+            with open(path, 'a') as csvfile:
+                fieldnames = ['feature', 'feature_value', 'precision', 'recall', 'f_beta']
+                writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+                if not file_exists:
+                    writer.writeheader()  # writing header only if file does not exist
+                    file_exists = True
+
+                writer.writerow({'feature': feature,
+                                 'feature_value': feature_value,
+                                 'precision': precision_sl,
+                                 'recall': recall_sl,
+                                 'f_beta': f_beta_sl})
 
 
 if __name__ == "__main__":
@@ -87,12 +124,12 @@ if __name__ == "__main__":
     model_path = os.path.join(os.path.abspath(os.curdir), model_dir, 'model.pkl')
     save_model(model_path, trained_model)
 
-
-
-
-
-""" 
-# load
-with open('model.pkl', 'rb') as f:
-    clf2 = pickle.load(f)
-"""
+    # Slicing perfo
+    """ 
+    with open(model_path, 'rb') as mdl_f:
+        loaded_model = pickle.load(mdl_f)
+    """
+    log_dir = 'logs'
+    slice_file = 'slicing_perfo.csv'
+    log_path = os.path.join(cur_dir, log_dir, slice_file)
+    slicing_perfo(log_path, cat_features, test, encoder, lb, trained_model)
