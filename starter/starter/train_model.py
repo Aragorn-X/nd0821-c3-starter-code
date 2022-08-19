@@ -124,6 +124,14 @@ if __name__ == "__main__":
     model_path = os.path.join(os.path.abspath(os.curdir), model_dir, 'model.pkl')
     save_model(model_path, trained_model)
 
+    # Save encoder and binarizer
+    binarizer_path = os.path.join(os.path.abspath(os.curdir), model_dir, 'model_lb.pkl')
+    pickle.dump(lb, open(binarizer_path, 'wb'))
+    encoder_path = os.path.join(os.path.abspath(os.curdir), model_dir, 'model_encoder.pkl')
+    pickle.dump(encoder, open(encoder_path, 'wb'))
+
+
+
     # Slicing perfo
     """ 
     with open(model_path, 'rb') as mdl_f:
