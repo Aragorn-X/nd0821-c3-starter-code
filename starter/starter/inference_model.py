@@ -1,6 +1,7 @@
 import os
 import numpy as np
 import pickle
+from ml import data, model
 
 cur_dir = os.path.abspath(os.curdir)
 print(cur_dir)
@@ -27,7 +28,7 @@ def load_pkl(pth):
     return pkl_f
 
 
-def execute_inference(data: np.array, cat_features: list):
+def execute_inference(in_data: np.array, cat_features: list):
     # cur_dir = os.path.abspath(os.curdir)
     os.chdir("..")
     model_dir = 'model'
@@ -40,3 +41,12 @@ def execute_inference(data: np.array, cat_features: list):
     binarizer_file = 'model_lb.pkl'
     binarizer_path = os.path.join(os.path.abspath(os.curdir), model_dir, binarizer_file)
     rf_bin = load_pkl(binarizer_path)
+    X, _, _, _ = data.process_data(
+        in_data,
+        categorical_features=cat_features,
+        encoder=rf_encoder,
+        lb=rf_bin,
+        training=False)
+
+    preds = model.inference(rf_model, X)
+    return preds
