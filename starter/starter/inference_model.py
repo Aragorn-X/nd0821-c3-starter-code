@@ -1,26 +1,9 @@
 import os
 import numpy as np
 import pickle
-from ml import data, model
+from .ml import data, model
+import pandas as pd
 
-cur_dir = os.path.abspath(os.curdir)
-print(cur_dir)
-os.chdir("..")
-model_dir = 'model'
-model_file = 'model.pkl'
-model_path = os.path.join(os.path.abspath(os.curdir), model_dir, model_file)
-with open(model_path, 'rb') as mdl_f:
-    rf_model = pickle.load(mdl_f)
-
-encoder_file = 'model_encoder.pkl'
-encoder_path = os.path.join(os.path.abspath(os.curdir), model_dir, encoder_file)
-with open(encoder_path, 'rb') as enc_f:
-    rf_encoder = pickle.load(enc_f)
-
-binarizer_file = 'model_lb.pkl'
-binarizer_path = os.path.join(os.path.abspath(os.curdir), model_dir, binarizer_file)
-with open(binarizer_path, 'rb') as bin_f:
-    rf_bin = pickle.load(bin_f)
 
 def load_pkl(pth):
     with open(pth, 'rb') as f:
@@ -28,9 +11,18 @@ def load_pkl(pth):
     return pkl_f
 
 
-def execute_inference(in_data: np.array, cat_features: list):
+def execute_inference(in_data: pd.DataFrame):
     # cur_dir = os.path.abspath(os.curdir)
-    os.chdir("..")
+    cat_features = [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
+    ]
     model_dir = 'model'
     model_file = 'model.pkl'
     model_path = os.path.join(os.path.abspath(os.curdir), model_dir, model_file)
@@ -47,6 +39,7 @@ def execute_inference(in_data: np.array, cat_features: list):
         encoder=rf_encoder,
         lb=rf_bin,
         training=False)
-
     preds = model.inference(rf_model, X)
-    return preds
+    prediction = rf_bin.inverse_transform(preds)[0]
+    return prediction
+
