@@ -23,5 +23,5 @@ data = {
 
 client = TestClient(app)
 data = json.dumps(data)
-resp = client.post("http://127.0.0.1:8000/", data=data)   # response
+resp = client.post("http://127.0.0.1:8000/", data=data)
 print('\nModel classification result: ', resp.json())
