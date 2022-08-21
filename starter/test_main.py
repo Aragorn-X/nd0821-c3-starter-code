@@ -11,7 +11,7 @@ def test_say_welcome():
     assert r.status_code == 200
     assert r.json() == {"greeting": "Welcome!"}
 
-# Testing POST <= 50k
+# Testing POST for prediction <= 50k
 def test_perform_inference():
     data = {
         "age": [21],
@@ -33,10 +33,11 @@ def test_perform_inference():
     data = json.dumps(data)
     resp = client.post("http://127.0.0.1:8000/", data=data)
     resp_str = json.loads(resp.text)
+    assert resp.status_code == 200
     assert resp_str == "<=50K"
 
 
-# Testing POST > 50k
+# Testing POST for prediction > 50k
 def test_perform_inference_2():
     data_2 = {
         "age": [40],
@@ -58,4 +59,5 @@ def test_perform_inference_2():
     data_2 = json.dumps(data_2)
     resp = client.post("http://127.0.0.1:8000/", data=data_2)
     resp_str = json.loads(resp.text)
+    assert resp.status_code == 200
     assert resp_str == ">50K"
