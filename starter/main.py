@@ -5,6 +5,13 @@ from pydantic import BaseModel, Field
 from typing import Union
 import pandas as pd
 
+import os
+
+if "DYNO" in os.environ and os.path.isdir(".dvc"):
+    os.system("dvc config core.no_scm true")
+    if os.system("dvc pull") != 0:
+        exit("dvc pull failed")
+    os.system("rm -r .dvc .apt/usr/lib/dvc")
 
 # Creating input data model structure using Pydantic
 class DataModel(BaseModel):
