@@ -1,6 +1,7 @@
 # Put the code for your API here.
 from fastapi import FastAPI
-from starter import inference_model
+#from .starter import inference_model
+from inference_model import execute_inference
 from pydantic import BaseModel, Field
 from typing import Union
 import pandas as pd
@@ -53,5 +54,5 @@ async def perform_inference(input_data: DataModel):
     input_dict = input_data.dict()
     input_df = pd.DataFrame(input_dict)
     input_df.columns = input_df.columns.str.replace("[_]", "-")
-    prediction = inference_model.execute_inference(in_data=input_df)
+    prediction = execute_inference(in_data=input_df)
     return prediction
