@@ -131,3 +131,6 @@ def execute_inference(in_data: pd.DataFrame):
     prediction = rf_bin.inverse_transform(preds)[0]
     return prediction
 
+
+if __name__ == '__main__':
+    print('Executing app')
