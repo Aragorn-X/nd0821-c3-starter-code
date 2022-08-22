@@ -132,5 +132,5 @@ def execute_inference(in_data: pd.DataFrame):
     return prediction
 
 
-if __name__ == '__main__':
-    print('Executing app')
+#if __name__ == '__main__':
+#    print('Executing app')
