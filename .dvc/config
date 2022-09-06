@@ -1,5 +1,4 @@
 [core]
     remote = myremote
-    hardlink_lock = true
 ['remote "myremote"']
     url = s3://prj3-bkt/
