@@ -2,9 +2,10 @@ import os
 import logging
 import pandas as pd
 #import train_model
+from ml import data, model
+
 from train_model import import_data, training_model, save_model
 from sklearn.model_selection import train_test_split
-from ml import data, model
 
 
 logging.basicConfig(
