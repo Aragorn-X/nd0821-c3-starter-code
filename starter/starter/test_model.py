@@ -3,11 +3,13 @@ import logging
 import pandas as pd
 #import train_model
 import numpy as np
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.preprocessing import LabelBinarizer, OneHotEncoder
+import pickle
 
 # from ml import data, model
 
-from train_model import import_data, training_model, save_model
+# from train_model import import_data, training_model, save_model
 from sklearn.model_selection import train_test_split
 
 
@@ -16,6 +18,57 @@ logging.basicConfig(
     level=logging.INFO,
     filemode='w',
     format='%(name)s - %(levelname)s - %(message)s')
+
+
+def save_model(path, t_model):
+    '''
+    Saving trained model to specified path dir
+    :param path: path to model dir
+    :param t_model: trained model
+    '''
+    with open(path, 'wb') as m_file:
+        pickle.dump(t_model, m_file)
+
+
+def train_model(X_train, y_train):
+    """
+    Trains a machine learning model and returns it.
+
+    Inputs
+    ------
+    X_train : np.array
+        Training data.
+    y_train : np.array
+        Labels.
+    Returns
+    -------
+    model
+        Trained machine learning model.
+    """
+    model = RandomForestClassifier()
+    model.fit(X_train, y_train)
+    return model
+
+
+def training_model(input_array, target_array):
+    '''
+    :param input_array: input np.array
+    :param target_array: target np.array
+    :return: output_model: trained model
+    '''
+    output_model = train_model(input_array, target_array)
+
+    return output_model
+
+
+def import_data(path):
+    '''
+    :param path: path to csv file
+    :return: df: pandas dataframe
+    '''
+    df = pd.read_csv(path)
+    return df
+
 
 def process_data(
     X, categorical_features=[], label=None, training=True, encoder=None, lb=None
