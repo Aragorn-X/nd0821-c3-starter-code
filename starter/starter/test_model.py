@@ -1,7 +1,8 @@
 import os
 import logging
 import pandas as pd
-import train_model
+#import train_model
+from train_model import import_data, training_model, save_model
 from sklearn.model_selection import train_test_split
 from ml import data, model
 
@@ -36,7 +37,7 @@ def test_training(training_model):
     data_dir = 'data'
     csv_file = 'census_clean.csv'  # cleaned file (all spaces removed)
     data_path = os.path.join(os.path.abspath(os.curdir), data_dir, csv_file)
-    data_df = train_model.import_data(data_path)
+    data_df = import_data(data_path)
     train, test = train_test_split(data_df, test_size=0.20, random_state=42)
 
     cat_features = [
@@ -70,7 +71,7 @@ def test_saving(save_model):
     data_dir = 'data'
     csv_file = 'census_clean.csv'  # cleaned file (all spaces removed)
     data_path = os.path.join(cur_dir, data_dir, csv_file)
-    data_df = train_model.import_data(data_path)
+    data_df = import_data(data_path)
     train, test = train_test_split(data_df, test_size=0.20)
 
     cat_features = [
@@ -88,7 +89,7 @@ def test_saving(save_model):
         train, categorical_features=cat_features, label="salary", training=True
     )
 
-    output_model = train_model.training_model(X_train, y_train)
+    output_model = training_model(X_train, y_train)
 
     model_dir = 'model'
     model_path = os.path.join(os.path.abspath(os.curdir), model_dir, 'model.pkl')
@@ -102,6 +103,6 @@ def test_saving(save_model):
 
 
 if __name__ == "__main__":
-    test_import(train_model.import_data)
-    test_training(train_model.training_model)
-    test_saving(train_model.save_model)
+    test_import(import_data)
+    test_training(training_model)
+    test_saving(save_model)
