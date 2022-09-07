@@ -92,14 +92,30 @@ def path_to_model():
     return model_path
 
 
-def saving_model(data_segregation, path_to_model):
-    in_put, target = data_segregation
-    model = train_model.training_model(in_put, target)
+def saving_model(path_to_model):
+    data_df = import_data(path)
+    train, test = train_test_split(data_df, test_size=0.20, random_state=42)
+
+    cat_features = [
+        "workclass",
+        "education",
+        "marital-status",
+        "occupation",
+        "relationship",
+        "race",
+        "sex",
+        "native-country",
+    ]
+
+    X_train, y_train, _, _ = data.process_data(
+        train, categorical_features=cat_features, label="salary", training=True
+    )
+    model = train_model.training_model(X_train, y_train)
     train_model.save_model(path_to_model, model)
 
 
 def test_saving_model(path_to_model):
-    saving_model(data_segregation, path_to_model)
+    saving_model(path_to_model)
     try:
         os.path.isfile(path_to_model)
         logging.info("Testing save_model: SUCCESS")
