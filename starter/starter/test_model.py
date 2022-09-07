@@ -103,5 +103,5 @@ def test_saving(save_model):
 
 if __name__ == "__main__":
     test_import(train_model.import_data)
-    test_training(train_model.training_model)
-    test_saving(train_model.save_model)
+    #test_training(train_model.training_model)
+    #test_saving(train_model.save_model)

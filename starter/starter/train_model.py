@@ -10,7 +10,7 @@ import pickle
 import csv
 import pytest
 # Add code to load in the data.
-@pytest.fixture(scope="session")
+
 def import_data(path):
     '''
     :param path: path to csv file
@@ -19,7 +19,7 @@ def import_data(path):
     df = pd.read_csv(path)
     return df
 
-@pytest.fixture
+
 def training_model(input_array, target_array):
     '''
     :param input_array: input np.array
@@ -30,7 +30,7 @@ def training_model(input_array, target_array):
 
     return output_model
 
-@pytest.fixture
+
 def save_model(path, t_model):
     '''
     Saving trained model to specified path dir
