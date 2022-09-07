@@ -1,6 +1,6 @@
 # Put the code for your API here.
 from fastapi import FastAPI
-from starter import inference_model
+from starter.starter import inference_model
 from pydantic import BaseModel, Field
 from typing import Union
 import pandas as pd
