@@ -92,7 +92,7 @@ def path_to_model():
     return model_path
 
 
-def saving_model(path_to_model):
+def saving_model(data_segregation, path_to_model):
     in_put, target = data_segregation
     model = train_model.training_model(in_put, target)
     train_model.save_model(path_to_model, model)
