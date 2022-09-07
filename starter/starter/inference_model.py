@@ -1,7 +1,9 @@
 import os
 import numpy as np
 import pickle
-from .ml import data, model
+# from .ml import data, model
+from starter.starter.ml import data, model
+
 import pandas as pd
 
 
