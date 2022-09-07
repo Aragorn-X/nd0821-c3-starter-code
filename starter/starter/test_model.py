@@ -92,8 +92,8 @@ def path_to_model():
     return model_path
 
 
-def saving_model(path_to_model):
-    in_put, target = data_segregation
+def saving_model(path, path_to_model):
+    in_put, target = data_segregation(path)
     model = train_model.training_model(in_put, target)
     train_model.save_model(path_to_model, model)
 
