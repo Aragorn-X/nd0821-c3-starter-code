@@ -1,7 +1,7 @@
 import os
 import logging
 
-from ml import data, model
+from starter.starter.ml import data, model
 from train_model import import_data, training_model, save_model
 from sklearn.model_selection import train_test_split
 
