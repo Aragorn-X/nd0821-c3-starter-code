@@ -67,8 +67,10 @@ def data_segregation(path):
 
 
 def training_output(data_segregation):
-    output = train_model.training_model(data_segregation)
+    in_put, target = data_segregation
+    output = train_model.training_model(in_put, target)
     return output
+
 
 def test_training_output(data_segregation):
     '''
