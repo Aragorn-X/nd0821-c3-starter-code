@@ -4,13 +4,13 @@ from fastapi.testclient import TestClient
 
 
 client = TestClient(app)
-""" 
+
 # Testing GET
 def test_say_welcome():
     r = client.get("http://127.0.0.1:8000/")
     assert r.status_code == 200
     assert r.json() == {"greeting": "Welcome!"}
-"""
+
 # Testing POST for prediction <= 50k
 def test_perform_inference():
     data = {
