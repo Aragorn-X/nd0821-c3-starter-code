@@ -93,7 +93,11 @@ def path_to_model():
 
 
 def saving_model(path_to_model):
-    data_df = import_data(path)
+    parent_dir = 'starter'
+    data_dir = 'data'
+    data_file = 'census_clean.csv'
+    data_path = os.path.join(os.path.abspath(os.curdir), parent_dir, data_dir, data_file)
+    data_df = pd.read_csv(data_path)
     train, test = train_test_split(data_df, test_size=0.20, random_state=42)
 
     cat_features = [
