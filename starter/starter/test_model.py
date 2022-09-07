@@ -85,7 +85,29 @@ def test_training_output(data_segregation):
             "Testing train_models: The model doesn't appear to have the 'fit' method")
         raise err
 
-"""
+@pytest.fixture
+def path_to_model():
+    model_dir = 'starter/model'
+    model_path = os.path.join(os.path.abspath(os.curdir), model_dir, 'model.pkl')
+    return model_path
+
+
+def saving_model(path, path_to_model):
+    model = training_output(data_segregation(path))
+    train_model.save_model(path_to_model, model)
+
+
+def test_saving_model():
+    saving_model(path, path_to_model)
+    try:
+        os.path.isfile(path_to_model)
+        logging.info("Testing save_model: SUCCESS")
+    except FileNotFoundError as err:
+        logging.error("Testing save_model: The file wasn't found")
+        raise err
+
+
+""" 
 def test_saving(save_model):
     cur_dir = os.path.abspath(os.curdir)
     data_dir = 'data'
