@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 
 
 logging.basicConfig(
-    filename='logs/model_testing.log',
+    filename='starter/starter/logs/model_testing.log',
     level=logging.INFO,
     filemode='w',
     format='%(name)s - %(levelname)s - %(message)s')
