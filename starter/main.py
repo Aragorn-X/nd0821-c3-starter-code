@@ -54,12 +54,12 @@ class DataModel(BaseModel):
 
 # Instantiating the app
 app = FastAPI()
-
+""" 
 # Defining a GET on the specified endpoint
 @app.get("/")
 async def say_welcome():
     return {"greeting": "Welcome!"}
-
+"""
 # Defining a POST request performing model inference
 @app.post("/")
 async def perform_inference(input_data: DataModel):
