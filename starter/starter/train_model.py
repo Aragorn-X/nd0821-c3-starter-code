@@ -10,7 +10,7 @@ import pickle
 import csv
 import pytest
 # Add code to load in the data.
-@pytest.fixture
+@pytest.fixture(scope="session")
 def import_data(path):
     '''
     :param path: path to csv file
