@@ -1,5 +1,7 @@
 import os
 import logging
+import pandas as pd
+import pytest
 
 from starter.starter.ml import data, model
 from starter.starter import train_model
@@ -13,19 +15,32 @@ logging.basicConfig(
     format='%(name)s - %(levelname)s - %(message)s')
 
 
-def test_import(import_data):
+@pytest.fixture
+def path():
+    return "../data/census_clean.csv"
+def import_data(path):
+    '''
+    :param path: path to csv file
+    :return: df: pandas dataframe
+    '''
+    df = pd.read_csv(path)
+    return df
+
+
+
+def test_import_data(path):
     '''
     test data import:
     - check if file exists in directory
     '''
     try:
-        import_data("../data/census_clean.csv")
+        import_data(path)
         logging.info("Testing import_data: SUCCESS")
     except FileNotFoundError as err:
         logging.error("Testing import_data: The file wasn't found")
         raise err
 
-
+""" 
 def test_training(training_model):
     '''
     test training_model:
@@ -99,9 +114,9 @@ def test_saving(save_model):
     except FileNotFoundError as err:
         logging.error("Testing save_model: The file wasn't found")
         raise err
-
+"""
 
 if __name__ == "__main__":
-    test_import(train_model.import_data)
+    test_import_data(train_model.import_data)
     #test_training(train_model.training_model)
     #test_saving(train_model.save_model)
