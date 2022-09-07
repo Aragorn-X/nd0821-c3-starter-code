@@ -99,7 +99,7 @@ def saving_model(data_segregation, path_to_model):
 
 
 def test_saving_model(path_to_model):
-    saving_model(path_to_model)
+    saving_model(data_segregation, path_to_model)
     try:
         os.path.isfile(path_to_model)
         logging.info("Testing save_model: SUCCESS")
