@@ -31,10 +31,10 @@ def execute_inference(in_data: pd.DataFrame):
     model_path = os.path.join(os.path.abspath(os.curdir), parent_dir, model_dir, model_file)
     rf_model = load_pkl(model_path)
     encoder_file = 'model_encoder.pkl'
-    encoder_path = os.path.join(os.path.abspath(os.curdir), model_dir, encoder_file)
+    encoder_path = os.path.join(os.path.abspath(os.curdir), parent_dir, model_dir, encoder_file)
     rf_encoder = load_pkl(encoder_path)
     binarizer_file = 'model_lb.pkl'
-    binarizer_path = os.path.join(os.path.abspath(os.curdir), model_dir, binarizer_file)
+    binarizer_path = os.path.join(os.path.abspath(os.curdir), parent_dir, model_dir, binarizer_file)
     rf_bin = load_pkl(binarizer_path)
     X, _, _, _ = data.process_data(
         in_data,
