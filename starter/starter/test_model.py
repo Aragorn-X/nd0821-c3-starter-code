@@ -17,7 +17,11 @@ logging.basicConfig(
 
 @pytest.fixture
 def path():
-    return "../data/census_clean.csv"
+    parent_dir = 'starter'
+    data_dir = 'data'
+    data_file = 'census_clean.csv'
+    data_path = os.path.join(os.path.abspath(os.curdir), parent_dir, data_dir, data_file)
+    return data_path
 def import_data(path):
     '''
     :param path: path to csv file
