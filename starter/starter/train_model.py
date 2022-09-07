@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 # Add the necessary imports for the starter code.
 import pandas as pd
 import os
-from ml import data, model
+from starter.starter.ml import data, model
 import pickle
 import csv
 
