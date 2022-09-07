@@ -25,7 +25,7 @@ def execute_inference(in_data: pd.DataFrame):
         "sex",
         "native-country",
     ]
-    model_dir = 'model'
+    model_dir = 'starter/model'
     model_file = 'model.pkl'
     model_path = os.path.join(os.path.abspath(os.curdir), model_dir, model_file)
     rf_model = load_pkl(model_path)
