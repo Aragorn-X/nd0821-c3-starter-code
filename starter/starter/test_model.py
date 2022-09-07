@@ -2,7 +2,7 @@ import os
 import logging
 
 from starter.starter.ml import data, model
-from starter.starter import train_model #import_data, training_model, save_model
+from starter.starter import train_model
 from sklearn.model_selection import train_test_split
 
 
