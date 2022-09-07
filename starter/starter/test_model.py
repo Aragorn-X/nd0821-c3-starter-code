@@ -3,6 +3,7 @@ import logging
 
 from starter.starter.ml import data, model
 from starter.starter import train_model
+from train_model import import_data, training_model, save_model
 from sklearn.model_selection import train_test_split
 
 
@@ -102,6 +103,6 @@ def test_saving(save_model):
 
 
 if __name__ == "__main__":
-    test_import(train_model.import_data)
-    test_training(train_model.training_model)
-    test_saving(train_model.save_model)
+    test_import(import_data)
+    test_training(training_model)
+    test_saving(save_model)
