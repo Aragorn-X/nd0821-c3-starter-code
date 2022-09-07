@@ -92,13 +92,14 @@ def path_to_model():
     return model_path
 
 
-def saving_model(path, path_to_model):
-    model = training_output(data_segregation(path))
+def saving_model(path_to_model):
+    in_put, target = data_segregation
+    model = train_model.training_model(in_put, target)
     train_model.save_model(path_to_model, model)
 
 
-def test_saving_model():
-    saving_model(path, path_to_model)
+def test_saving_model(path_to_model):
+    saving_model(path_to_model)
     try:
         os.path.isfile(path_to_model)
         logging.info("Testing save_model: SUCCESS")
